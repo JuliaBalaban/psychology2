@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юлия Балабан — Ваш психолог, специалист по подсознанию</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6d5b4b;
+            --text-color: #333;
+            /* Определяем цвета для градиентного перехода */
+            --bg-child-top: #ffe0cc;    /* Мягкий розово-персиковый */
+            --bg-child-mid: #fff8cc;    /* Светло-жёлтый */
+            --bg-adult-mid: #ccdae0;    /* Спокойный серо-голубой */
+            --bg-adult-bottom: #6d8c6d; /* Глубокий зелёный */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Полный, вертикальный градиент для всего сайта. 
+               Переход от мягких "детских" тонов к глубоким "взрослым". */
+            background: linear-gradient(to bottom, 
+                var(--bg-child-top) 0%, 
+                var(--bg-child-mid) 25%, 
+                var(--bg-adult-mid) 75%, 
+                var(--bg-adult-bottom) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Обертка для позиционирования фото в углу */
+        .page-wrapper {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        /* Стиль для портрета в углу */
+        .corner-portrait {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            max-width: 200px; /* Умеренный размер для угла */
+            height: auto;
+            border-radius: 20px; /* Закруглённые углы */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); /* Лёгкая тень */
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        .subtitle { font-size: 1.2em; font-weight: 300; color: #555; }
+
+        section { padding: 60px 0; border-bottom: 1px solid rgba(109, 91, 75, 0.1); }
+
+        /* Карточки для контента с полупрозрачным фоном */
+        .content-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: 30px;
+        }
+
+        .price-card {
+            text-align: center;
+        }
+
+        .price-value { font-size: 2em; font-weight: 600; color: var(--primary-color); margin: 20px 0; }
+
+        .btn {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .about-grid { display: grid; gap: 20px; margin-top: 30px; }
+        .feature { 
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02); 
+        }
+
+        /* --- Стили для аккордеона (раскрывающихся списков) --- */
+        details {
+            background: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        summary {
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            list-style: none;
+            color: var(--primary-color);
+            outline: none;
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::before {
+            content: '+ ';
+            display: inline-block;
+            width: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        details[open] summary::before {
+            content: '− ';
+        }
+
+        details p {
+            margin-top: 15px;
+            margin-bottom: 0;
+            padding-left: 20px;
+            font-size: 1em;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* --- Стили для галереи дипломов --- */
+        .diploma-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .diploma-item {
+            flex-basis: calc(50% - 20px);
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #fff;
+            overflow: hidden;
+        }
+        .diploma-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Стили для кнопки Telegram --- */
+        .social-links { text-align: center; margin-top: 40px; }
+        .tg-btn {
+            display: inline-block;
+            background-color: #0088cc;
+            color: white !important;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tg-btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #888; }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .corner-portrait { 
+                position: static;
+                display: block;
+                margin: 0 auto 20px;
+                max-width: 180px;
+            }
+            .diploma-item {
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <img src="image_0.png" alt="Портрет Юлии Балабан" class="corner-portrait">
+
+        <header>
+            <div class="container">
+                <h1>Юлия Балабан</h1>
+                <p class="subtitle">Психолог, специалист по работе с подсознанием. Вместе мы найдем те самые глубинные причины, которые мешают вам создать жизнь, о которой вы мечтаете.</p>
+            </div>
+        </header>
+
+        <section id="consultation">
+            <div class="container">
+                <h2 style="text-align: center;">Личная онлайн-консультация</h2>
+                <div class="content-card price-card">
+                    <p>Глубинная проработка любых ваших запросов: от отношений и самооценки до реализации и финансовых блоков. Это безопасное пространство для ваших изменений.</p>
+                    <div class="price-value">5 000 руб.</div>
+                    <p>Длительность: 60–90 минут полного погружения</p>
+                    <a href="https://wa.me/79256379020" class="btn" target="_blank">Записаться через WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>Обо мне</h2>
+                <p>Я искренне верю: у вас уже есть все ресурсы для перемен. Моя задача — помочь вам увидеть слепые зоны, бережно подсветить их и дать проверенные инструменты для трансформации вашей жизни.</p>
+                <div class="about-grid">
+                    <div class="feature">✓ Более 15 лет бережной практики</div>
+                    <div class="feature">✓ Сотни людей, обретших гармонию</div>
+                    <div class="feature">✓ Индивидуальный и глубокий подход</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="topics">
+            <div class="container">
+                <h2>С какими запросами я работаю наиболее эффективно</h2>
+                <div class="content-card">
+                    <details>
+                        <summary>Чувство самозванца и неуверенность</summary>
+                        <p>Помогу обрести внутреннюю опору и уверенность в себе, чтобы вы могли проявлять себя без страха чужого осуждения и сомнений в собственной ценности.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>Проблемы в отношениях</summary>
+                        <p>Мы разберем скрытые сценарии поведения, научимся выстраивать здоровые личные границы и создадим прочный фундамент для гармоничных, теплых связей.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>Поиск предназначения и финансы</summary>
+                        <p>Найдем ваши истинные желания, бережно проработаем ограничивающие денежные убеждения и блоки, чтобы открыть путь к реализации вашего потенциала.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>Тревожность и страхи</summary>
+                        <p>Найдем и устраним глубинные причины вашей тревоги. Вернем вам состояние внутреннего спокойствия, ресурса и контроля над собственной жизнью.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="diplomas">
+            <div class="container">
+                <h2 style="text-align: center;">Образование и сертификаты</h2>
+                <p>Я постоянно учусь и совершенствую свои методы, чтобы помогать вам наиболее эффективно. Моё образование — это фундамент, на котором строится моя практика.</p>
+                
+                <div class="content-card">
+                    <h3>Базовое образование</h3>
+                    <ul>
+                        <li>Российский государственный гуманитарный университет (РГГУ), Москва (2003 г.) — Квалификация: Психолог. Преподаватель. Специальность: "Психология".</li>
+                    </ul>
+
+                    <h3>Профессиональная переподготовка и специализация</h3>
+                    <ul>
+                        <li>Институт Психодрамы и Ролевого Тренинга, Москва (2005 г.) — Квалификация: Психодраматерапевт, групповой терапевт, социометрист. Объем: 900 часов теории и практики, 150 часов клинической практики.</li>
+                        <li>Институт Практической Психологии и Психоанализа, Москва (2011 г.) — Программа: Танцевально-двигательная психотерапия. Диплом дает право на ведение профессиональной деятельности в сфере практической психологии и психокоррекции. Ключевые предметы: психофизиология, клиническая психология, танцевально-двигательная терапия.</li>
+                    </ul>
+
+                    <h3>Повышение квалификации</h3>
+                    <ul>
+                        <li>Институт Практической Психологии и Психоанализа, Москва (2021 г.) — Курс: "Аутентичное Движение как психотерапевтическая модальность". Объем: 184 академических часа.</li>
+                    </ul>
+                </div>
+
+                <div class="diploma-gallery">
+                    <div class="diploma-item">
+                        <img src="image_6.png" alt="Диплом РГГУ" />
+                    </div>
+                    <div class="diploma-item">
+                        <img src="image_3.png" alt="Сертификат Института Психодрамы" />
+                    </div>
+                    <div class="diploma-item">
+                        <img src="image_2.png" alt="Диплом о переподготовке" />
+                    </div>
+                    <div class="diploma-item">
+                        <img src="image_1.png" alt="Удостоверение о повышении квалификации" />
+                    </div>
+                    <div class="diploma-item">
+                        <img src="image_4.png" alt="Приложение к диплому (1)" />
+                    </div>
+                    <div class="diploma-item">
+                        <img src="image_5.png" alt="Приложение к диплому (2)" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="socials">
+            <div class="container">
+                <h2 style="text-align: center;">Полезные материалы</h2>
+                <div class="social-links">
+                    <a href="https://t.me/balabanjulia" target="_blank" class="tg-btn">Мой Telegram-канал</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Юлия Балабан. Все права защищены.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
